@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct list {
+int value;
+struct list* next;
+};
+
+void insertNodeList(struct list** l){
+    struct list* node, *ptr=*l;
+
+    node=(struct list*)malloc(sizeof (struct list));
+    if(node==NULL){
+        printf("problima sthn katanomh mnimis");
+        return ;
+    }
+    node->next=NULL;
+    printf("eisigage to value");
+    scanf("%d", &(node->value));
+
+    
+    if((*l)==NULL){ 
+        *l=node;
+        return ;
+    }
+    while(ptr->next!=NULL)
+        ptr=ptr->next;
+    ptr->next=node;
+    return ;
+}
+
+
+void printList(struct list* l){
+    if(l==NULL)
+        return;
+    else{
+        printf("%d ", l->value);
+        printList(l->next);
+}
+}
+
+int checkModuloOfSum(struct list *node){
+    int sum=0;
+    if (node->next!=NULL)  
+        sum=checkModuloOfSum(node->next);
+    if(sum%node->value!=0)
+        printf("%d [%d] (oxi)", node->value, sum);
+    else
+        printf("%d [%d] (nai)", node->value, sum);
+    sum=sum+node->value;
+    return sum;
+}
+
+
+int main()
+{
+    int N, k, sum;
+    struct list* head=NULL;
+    printf("eisigage ton arithmo kombwn pou epithimeis: ");
+    scanf("%d", &N);
+    for (k=0; k<N; k++)
+    insertNodeList(&head);
+    printList(head);
+    sum=checkModuloOfSum(head);
+
+    return 0;
+}

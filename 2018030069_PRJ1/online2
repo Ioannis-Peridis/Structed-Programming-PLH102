@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct list{
+	int value;
+	struct list *next;
+};
+
+struct list * createnodelist(int N);
+void printlist(struct list * l);
+struct list * findAndPushBack(int n, struct list * node);
+
+int main()
+{
+    int N,number;
+    printf("eisigage ton arithmo twn kombwn\n");
+    scanf("%d",&N);
+    struct list * head, *ptr1;
+    head=NULL;
+    head=createnodelist(N);
+    printlist(head);
+    printf("eisigage ton arithmo pou thes\n");
+    scanf("%d",&number);
+    ptr1=findAndPushBack(number, head);
+
+    printlist(ptr1);
+    return 0;
+}
+
+struct list * createnodelist(int N)
+{
+    struct list * node, *ptr, *head;
+    int i;
+    node=head=ptr=NULL;
+    for(i=0; i<N; i++)
+    {
+       node=(struct list*)malloc(sizeof(struct list));
+       printf("eisigage to value tou kombou");
+       scanf("%d",&(node->value));
+       node->next=NULL;
+
+       if(head==NULL)
+
+           head=node;
+
+       else
+       {
+            ptr=head;
+            while(ptr->next!=NULL)
+                ptr=ptr->next;
+            ptr->next=node;
+       }
+    }
+    return head;
+}
+
+void printlist(struct list * l)
+{
+    while(l !=NULL)
+    {
+        printf("%d ",l->value);
+        l=l->next;
+    }
+
+
+    return ;
+}
+
+struct list * findAndPushBack(int n, struct list * node)
+{
+    struct list* tmp=node;
+    struct list *previous=node, *after=node;
+    while (tmp!=NULL){
+        if(tmp->value==n){
+            printf("o arithmos bretheike");
+            if (tmp->next->value>n){
+
+            if(node->next->next==NULL){ 
+                   after=previous->next;
+                   tmp=after;
+                   node=after;
+                   after->next=previous;
+                   previous->next=NULL;
+                   return node;
+                }
+                    while(previous->next!=tmp)
+                        previous=previous->next;
+
+                    previous->next=tmp->next
+                    while(after->next!=NULL)
+                        after=after->next; //briskontas ton kombo
+
+                    after->next=tmp;
+                    tmp->next=NULL;
+                    return node;
+
+                }
+
+
+            return node;
+        }
+        tmp=tmp->next;
+    }
+    printf("o arithmos den bretheike");
+    return node;
+}
+
